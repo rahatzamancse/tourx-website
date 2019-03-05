@@ -6,11 +6,12 @@ from tourx.forms import UserForm
 
 class UserFormView(View):
     form_class = UserForm
-    template_name = 'signup.html'
+
+    # template_name = 'signup.html'
 
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
+        return render(request, 'signup.html', {'form': form})
 
     def post(self, request):
         form = self.form_class(request.POST)
@@ -36,4 +37,14 @@ class UserFormView(View):
                     print('Successfully created User account')
                     return redirect('wait')
 
-        return render(request, self.template_name, {'form': form})
+        else:
+            return render(request, 'signup.html', {'form': form})
+
+
+class LoggedinView(View):
+    def get(self, request):
+        # Here is home
+        return render(request, template_name='registration/loggedin.html', context=None)
+
+    def post(self, request):
+        return render(request, template_name='registration/loggedin.html', context=None)

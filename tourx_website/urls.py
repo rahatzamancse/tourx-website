@@ -14,17 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 
 from tourx import views
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
-    path('admin/', admin.site.urls, name='admin'),
-    # path('sign/', TemplateView.as_view(template_name='signup.html'), name='sign'),
-    # path('signin/', TemplateView.as_view(template_name='signin.html'), name='signin'),
-    path('signup/', views.UserFormView.as_view(), name='signup'),
+    path('account/loggedin/', views.LoggedinView.as_view(), name='loggedin'),
+    path('account/', include('django.contrib.auth.urls')),
     path('wait/', TemplateView.as_view(template_name='wait.html'), name='wait'),
-    path('login/', TemplateView.as_view(template_name='login.html'), name='login'),
+    path('admin/', admin.site.urls, name='admin'),
+    path('accounts/signup/', views.UserFormView.as_view(), name='signup'),
+
+
+    # path('accounts/signup', TemplateView.as_view(template_name='signup.html'), name='sign'),
+    # path('signin/', views.SigninView.as_view(), name='signin'),
+    # path('login/', TemplateView.as_view(template_name='registration/loggedin.html'), name='login'),
 ]
