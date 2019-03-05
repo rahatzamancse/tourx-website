@@ -54,6 +54,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tourx_website.urls'
 
+LOGIN_REDIRECT_URL = '/account/loggedin/'
+LOGOUT_REDIRECT_URL = '/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
