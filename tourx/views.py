@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from tourx.forms import UserForm
+
+from tourx.forms import ProfileForm
 
 
-class UserFormView(View):
-    form_class = UserForm
+class ProfileFormView(View):
+    form_class = ProfileForm
 
     # template_name = 'signup.html'
 
@@ -19,15 +20,22 @@ class UserFormView(View):
 
         if form.is_valid():
             print('done')
-            user = form.save(commit=False)
+            profile = form.save(commit=False)
+            # profile = Profile.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'], email=form.cleaned_data['email'])
+            # profile = form.save(commit=False)
+            # profile.user = user
+            # profile.save()
 
-            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user.set_password(password)
-            print(user)
-            user.save()
+            # profile.username = username
+            profile.set_password(password)
+            # print(user)
+            # user.save()
+            # profile.user = user
+            profile.save()
 
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=email, password=password)
 
             if user is not None:
                 print('done')

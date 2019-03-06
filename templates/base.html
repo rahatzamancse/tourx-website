@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+{#    <link rel="icon" href="{% static 'images/loggedin/core-img/logo.png' %}">#}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -14,12 +17,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.4.8/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
 
 {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">#}
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
 
     {% block extra_css %}
     {% endblock %}
@@ -52,8 +56,14 @@
                 <li class="nav-item"><a href="about.html" class="nav-link">Counters</a></li>
                 <li class="nav-item"><a href="about.html" class="nav-link">Feedback</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Sign in</a></li>
-                <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign up</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'loggedin' %}" class="nav-link"><img src="{{ user.profile_pic.url }}" alt="Profile picture"/></a></li>
+                    <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Sign in</a></li>
+                    <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign up</a></li>
+                {% endif %}
+
             </ul>
         </div>
     </div>
