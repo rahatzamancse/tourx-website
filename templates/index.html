@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
+{% endblock %}
+
 {% block content %}
 <!-- I love to -->
 <section class="home-slider owl-carousel ftco-degree-bg">
