@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link href="{% static 'css/search.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="jumbotron bg-secondary">
+          <h1 class="display-4">{{ jumbo_title }}</h1>
+        </div>
+    </div>
+    <div id="search" class="mt-5 mb-5">
+        <div class="tb">
+            <div class="td">
+                <input type="text" placeholder="{{ search }}" required>
+            </div>
+            <div class="td" id="s-cover">
+                <button onclick="window.location.href = '{% url type next %}';">
+                    <div id="s-circle"></div>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <a href="#" style="color: #2e2e2e; opacity: .5">Not suggesting correctly?</a>
+    </div>
+    <div style="height: 250px;"></div>
+{%  endblock %}

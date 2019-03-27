@@ -1,7 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.template import Context
+from django.views.generic import DetailView
 from django.views.generic.base import View
 
+from tourx import models
 from tourx.forms import ProfileForm
 
 
@@ -56,3 +59,52 @@ class LoggedinView(View):
 
     def post(self, request):
         return render(request, template_name='registration/loggedin.html', context=None)
+
+
+def tour(request, val):
+    print('In tour')
+    if val == '1':
+        jumbo_title = 'I want to travel to...'
+        search = 'Sylhet?'
+        next_des = 2
+        typ = 'tour'
+        context = {'jumbo_title': jumbo_title, 'search': search, 'next': next_des, 'type': typ}
+        return render(request, template_name='tour.html', context=context)
+    elif val == '2':
+        jumbo_title = 'I want to go by...'
+        search = '4 wheel tempo'
+        next_des = 3
+        typ = 'tour'
+        context = {'jumbo_title': jumbo_title, 'search': search, 'next': next_des, 'type': typ}
+        return render(request, template_name='tour.html', context=context)
+    else:
+        product_list = models.Place.objects.all()
+        typ = 'tour'
+        context = {'products': product_list, 'type': typ}
+        print(product_list)
+        return render(request, template_name='selection.html', context=context)
+
+
+def hotel(request, val):
+    print('In hotel')
+    if val == '1':
+        jumbo_title = 'I want to live at...'
+        search = 'Sylhet?'
+        next_des = 2
+        typ = 'hotel'
+        context = {'jumbo_title': jumbo_title, 'search': search, 'next': next_des, 'type': typ}
+        return render(request, template_name='tour.html', context=context)
+    elif val == '2':
+        jumbo_title = 'We want to stay for ...'
+        search = '4 days'
+        next_des = 3
+        typ = 'hotel'
+        context = {'jumbo_title': jumbo_title, 'search': search, 'next': next_des, 'type': typ}
+        return render(request, template_name='tour.html', context=context)
+    else:
+        product_list = models.Hotel.objects.all()
+        typ = 'hotel'
+        context = {'products': product_list, 'type': typ}
+        print(product_list)
+        return render(request, template_name='selection.html', context=context)
+

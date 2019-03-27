@@ -1,194 +1,149 @@
 {% load static %}
-<div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-body">
-                <div class="quickview_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 col-lg-5">
-                                <div class="quickview_pro_img">
-                                    <img src="{% static 'images/loggedin/product-img/product-1.jpg' %}" alt="">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-7">
-                                <div class="quickview_pro_des">
-                                    <h4 class="title">Boutique Silk Dress</h4>
-                                    <div class="top_seller_product_rating mb-15">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </div>
-                                    <h5 class="price">$120.99 <span>$130</span></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia expedita quibusdam aspernatur, sapiente consectetur accusantium perspiciatis praesentium eligendi, in fugiat?</p>
-                                    <a href="#">View Full Product Details</a>
-                                </div>
 
-                                <form class="cart" method="post">
-                                    <div class="quantity">
-                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
-                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                    </div>
-                                    <button type="submit" name="addtocart" value="5" class="cart-submit">Add to cart</button>
+<!-- Modal: modalQuickView -->
+{% for product in products %}
+<div class="modal fade" id="buy_modal_{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-5">
+              <img class="d-block w-100" src="{{ product.map.url }}" width="100px" height="500px">
+          </div>
+          <div class="col-lg-7">
+            <h2 class="h2-responsive product-name">
+              <strong>{{ product.name }}</strong>
+            </h2>
+            <h4 class="h4-responsive">
+              <span class="green-text">
+                <strong>${{ product.price }}</strong>
+              </span>
+              <span class="grey-text">
+                <small>
+                  <s>${{ product.price }}</s>
+                </small>
+              </span>
+            </h4>
 
-                                    <div class="modal_pro_wishlist">
-                                        <a href="#" target="_blank"><i class="ti-heart"></i></a>
-                                    </div>
+            <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
-                                    <div class="modal_pro_compare">
-                                        <a href="#" target="_blank"><i class="ti-stats-up"></i></a>
-                                    </div>
-                                </form>
-                                <div class="share_wf mt-30">
-                                    <p>Share With Friend</p>
-                                    <div class="_icon">
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              <!-- Accordion card -->
+              <div class="card">
+
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingOne1">
+                  <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                    aria-controls="collapseOne1">
+                    <h5 class="mb-0">
+                      Description <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+
+                <!-- Card body -->
+                <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                  data-parent="#accordionEx">
+                  <div class="card-body">{{ product.description }}</div>
+                </div>
+
+              </div>
+              <!-- Accordion card -->
+
+              <!-- Accordion card -->
+              <div class="card">
+
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo2">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                    aria-expanded="false" aria-controls="collapseTwo2">
+                    <h5 class="mb-0">
+                        Review
+                       <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+
+                <!-- Card body -->
+                <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+                  data-parent="#accordionEx">
+                  <div class="card-body">{{ product.review }}</div>
+                </div>
+
+              </div>
+              <!-- Accordion card -->
+
+            </div>
+            <!-- Accordion wrapper -->
+
+
+            <!-- Add to Cart -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <select class="md-form mdb-select colorful-select dropdown-primary">
+                    <option value="" disabled selected>Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  </select>
+                  <label>Persons</label>
+
+                </div>
+                <div class="col-md-6">
+
+                  <select class="md-form mdb-select colorful-select dropdown-primary">
+                    <option value="" disabled selected>Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                      <option value="3">5</option>
+                      <option value="3">6</option>
+                  </select>
+                  <label>Children</label>
+
+                </div>
+              </div>
+              <div class="text-center mt-5">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary ml-5">DONE</button>
+              </div>
+            </div>
+            <!-- /.Add to Cart -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+
+<div class="container pt-5">
+    <div class="row pb-5">
+        {% for product in products %}
+            <div class="col-4 pb-5">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ product.picture.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+{#                        <a href="#" class="btn btn-primary">Add to Cart</a>#}
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buy_modal_{{ product.id }}">Get it!</button>
                     </div>
                 </div>
             </div>
-        </div>
+
+        {% endfor %}
     </div>
 </div>
 
-
-<section class="new_arrivals_area section_padding_100_0 clearfix">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section_heading text-center">
-                    <h2>{{ user.first_name }}</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="karl-projects-menu mb-100">
-        <div class="text-center portfolio-menu">
-            <button class="btn active" data-filter="*">ALL</button>
-            <button class="btn" data-filter=".women">WOMAN</button>
-            <button class="btn" data-filter=".man">MAN</button>
-            <button class="btn" data-filter=".access">ACCESSORIES</button>
-            <button class="btn" data-filter=".shoes">shoes</button>
-            <button class="btn" data-filter=".kids">KIDS</button>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row karl-new-arrivals">
-
-            <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.2s">
-
-                <div class="product-img">
-                    <img src="{% static 'images/loggedin/product-img/product-1.jpg' %}" alt="">
-                    <div class="product-quicview">
-                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="product-description">
-                    <h4 class="product-price">$39.90</h4>
-                    <p>Jeans midi cocktail dress</p>
-
-                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.3s">
-
-                <div class="product-img">
-                    <img src="{% static 'images/loggedin/product-img/product-2.jpg' %}" alt="">
-                    <div class="product-quicview">
-                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="product-description">
-                    <h4 class="product-price">$39.90</h4>
-                    <p>Jeans midi cocktail dress</p>
-
-                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 single_gallery_item access wow fadeInUpBig" data-wow-delay="0.4s">
-
-                <div class="product-img">
-                    <img src="{% static 'images/loggedin/product-img/product-3.jpg' %}" alt="">
-                    <div class="product-quicview">
-                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="product-description">
-                    <h4 class="product-price">$39.90</h4>
-                    <p>Jeans midi cocktail dress</p>
-
-                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 single_gallery_item shoes wow fadeInUpBig" data-wow-delay="0.5s">
-
-                <div class="product-img">
-                    <img src="{% static 'images/loggedin/product-img/product-4.jpg' %}" alt="">
-                    <div class="product-quicview">
-                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="product-description">
-                    <h4 class="product-price">$39.90</h4>
-                    <p>Jeans midi cocktail dress</p>
-
-                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.6s">
-
-                <div class="product-img">
-                    <img src="{% static 'images/loggedin/product-img/product-5.jpg' %}" alt="">
-                    <div class="product-quicview">
-                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="product-description">
-                    <h4 class="product-price">$39.90</h4>
-                    <p>Jeans midi cocktail dress</p>
-
-                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 single_gallery_item kids man wow fadeInUpBig" data-wow-delay="0.7s">
-
-                <div class="product-img">
-                    <img src="{% static 'images/loggedin/product-img/product-6.jpg' %}" alt="">
-                    <div class="product-quicview">
-                        <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="product-description">
-                    <h4 class="product-price">$39.90</h4>
-                    <p>Jeans midi cocktail dress</p>
-
-                    <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 

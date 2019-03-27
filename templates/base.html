@@ -44,20 +44,20 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#services" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Products
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="#">Tour</a>
-                        <a class="dropdown-item" href="#">Home/Hotel Sharing</a>
+                        <a class="dropdown-item" href="{% url 'tour' 1 %}">Tour</a>
+                        <a class="dropdown-item" href="{% url 'hotel' 1 %}">Home/Hotel Sharing</a>
                         <a class="dropdown-item" href="#">Security</a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="about.html" class="nav-link">Counters</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">Feedback</a></li>
+                <li class="nav-item"><a href="{% url 'counters' %}" class="nav-link">Counters</a></li>
+                <li class="nav-item"><a href="about" class="nav-link">Feedback</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'loggedin' %}" class="nav-link"><img src="{{ 'user.profile_pic.url' }}" alt="Profile picture"/></a></li>
+                    <li class="nav-item"><a href="{% url 'loggedin' %}" class="nav-link"><img src="{{ user.profile_pic.url }}" height="20px" width="20px" alt="Profile picture"/> {{ user.email }}</a></li>
                     <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
                 {% else %}
                     <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Sign in</a></li>
@@ -82,7 +82,6 @@
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
                         <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                         <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                        {#                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>#}
                     </ul>
                 </div>
             </div>
@@ -146,6 +145,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.googlemap/1.5/jquery.googlemap.min.js"></script>
 <script src="{% static 'js/main.js' %}"></script>
+
+{% block extra_script %}
+{% endblock %}
 
 </body>
 </html>

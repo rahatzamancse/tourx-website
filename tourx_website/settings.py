@@ -118,8 +118,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-# STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
-# STATICFILES_STORAGE = "whitenoise.djangoGzipManifestStaticFilesStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+STATICFILES_STORAGE = "whitenoise.djangoGzipManifestStaticFilesStorage"
 MEDIA_URL = "/media/"
-# MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 django_heroku.settings(locals())

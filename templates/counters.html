@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container pt-5">
+        <div class="row pb-5">
+            <h1>Counters near your place</h1>
+        </div>
+        <div class="row pb-5">
+            {% for counter in object_list %}
+                <div class="col-4 pb-5">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ counter.photo.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ counter.name }}</h5>
+                            <p class="card-text">{{ counter.additional_info }}</p>
+                            {#                        <a href="#" class="btn btn-primary">Add to Cart</a>#}
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

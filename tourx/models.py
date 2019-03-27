@@ -54,24 +54,42 @@ class Profile(AbstractUser):
 class Place(models.Model):
     name = models.CharField(max_length=60)
     description = models.CharField(max_length=200)
-    picture = models.FileField()
-    uploader = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='maps')
+    map = models.ImageField(upload_to='places')
+    distance = models.CharField(max_length=10)
+    price = models.CharField(max_length=10)
+    review = models.CharField(max_length=200)
+    # uploader = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+
+class Hotel(models.Model):
+    name = models.CharField(max_length=60)
+    description = models.CharField(max_length=200)
+    picture = models.ImageField(upload_to='maps')
+    map = models.ImageField(upload_to='places')
+    distance = models.CharField(max_length=10)
+    price = models.CharField(max_length=10)
+    review = models.CharField(max_length=200)
+    # uploader = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 
 class Review(models.Model):
-    reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    # reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    # place = models.ForeignKey(Place, on_delete=models.CASCADE)
     star = models.PositiveSmallIntegerField()
     description = models.CharField(max_length=200)
 
 
-class Travel(models.Model):
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+class Spot(models.Model):
+    # place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    name = models.CharField(max_length=60)
+    description = models.CharField(max_length=200)
     price = models.IntegerField()
+    photo = models.ImageField(upload_to='spots')
 
 
 class Counter(models.Model):
     name = models.CharField(max_length=60)
     address = models.CharField(max_length=100)
     additional_info = models.CharField(max_length=100)
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='counters')

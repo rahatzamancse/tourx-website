@@ -5,45 +5,71 @@
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/loggedin.css' %}">
     <link href="{% static 'css/loggedinresponsive.css' %}" rel="stylesheet">
+    <link href="{% static 'css/search.css' %}" rel="stylesheet">
 {% endblock %}
 
 
 {% block content %}
+    <div id="search" class="mt-5 mb-5">
+        <form method="get" action="">
+            <div class="tb">
+                <div class="td">
+                    <input type="text" placeholder="You are at" required>
+                </div>
+                <div class="td" id="s-cover">
+                    <button type="submit">
+                        <div id="s-circle"></div>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <section class="top-discount-area d-md-flex align-items-center">
         <div class="single-discount-area">
             <a href="#" class="catagories-button">
                 <h5>TRANSPORTATION</h5>
-                {#                <h6><a href="#">BUY NOW</a></h6>#}
             </a>
         </div>
         <div class="single-discount-area">
+            <a href="#" class="catagories-button">
             <h5>HOME/HOTEL BOOKING</h5>
-            {#                <h6>USE CODE: Colorlib</h6>#}
+            </a>
         </div>
 
         <div class="single-discount-area">
+            <a href="#" class="catagories-button">
             <h5>GUIDE SELECTION</h5>
-            {#                <h6>USE CODE: Colorlib</h6>#}
+            </a>
         </div>
     </section>
+    <div class="container-fluid">
+        <div class="row pb-5 pt-5 bg-dark" style="font-size: 24px; text-align: center;">
+            <div class="span4 offset-5">
+                <a href="#" class="text-white font-weight-bold text-center">
+                    SECURITY
+                </a>
+            </div>
+        </div>
+    </div>
 
-    {% include 'product_list.html' %}
+    {% include 'product_list.html' with objects='hello' %}
 
-    <section class="offer_area height-700 section_padding_100 bg-img" style="background-image: url({% static 'images/loggedin/bg-img/bg-5.jpg' %});">
+    <section class="offer_area height-700 section_padding_100 bg-img" style="background-image: url({% static 'images/user_offer.jpg' %});">
         <div class="container h-100">
             <div class="row h-100 align-items-end justify-content-end">
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="offer-content-area wow fadeInUp" data-wow-delay="1s">
-                        <h2>White t-shirt <span class="karl-level">Hot</span></h2>
-                        <p>* Free shipping until 25 Dec 2017</p>
+                        <h2>Only for you <span class="karl-level">Hot</span></h2>
+                        <p>* Available until 04 April 2019</p>
                         <div class="offer-product-price">
                             <h3><span class="regular-price">$25.90</span> $15.90</h3>
                         </div>
-                        <a href="#" class="btn karl-btn mt-30">Shop Now</a>
+                        <a href="{% url 'tour' 3 %}" class="btn karl-btn mt-30">Shop Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-{#    </div>#}
 {% endblock %}
