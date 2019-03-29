@@ -62,7 +62,6 @@ class LoggedinView(View):
 
 
 def tour(request, val):
-    print('In tour')
     if val == '1':
         jumbo_title = 'I want to travel to...'
         search = 'Sylhet?'
